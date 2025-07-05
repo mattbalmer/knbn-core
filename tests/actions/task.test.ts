@@ -269,6 +269,49 @@ describe('task actions', () => {
       expect(result.task.storyPoints).toBe(taskData.storyPoints);
     });
 
+    it('should create task with custom column', () => {
+      const filepath = Brands.Filepath(testFilepath);
+      const taskData = {
+        title: 'Task in Custom Column',
+        description: 'Task placed in doing column',
+        column: 'doing'
+      };
+      
+      const result = createTask(filepath, taskData);
+      
+      expect(result.task.title).toBe(taskData.title);
+      expect(result.task.description).toBe(taskData.description);
+      expect(result.task.column).toBe('doing');
+      
+      // Verify saved to file
+      const content = fs.readFileSync(testFilepath, 'utf8');
+      const savedBoard = yaml.load(content) as Board;
+      expect(savedBoard.tasks[result.task.id].column).toBe('doing');
+    });
+
+    it('should create task with custom column and all properties', () => {
+      const filepath = Brands.Filepath(testFilepath);
+      const taskData = {
+        title: 'Full Task in Done Column',
+        description: 'Complete task in done column',
+        column: 'done',
+        labels: ['completed', 'feature'],
+        sprint: 'Sprint 1',
+        priority: 1,
+        storyPoints: 5
+      };
+      
+      const result = createTask(filepath, taskData);
+      
+      expect(result.task.title).toBe(taskData.title);
+      expect(result.task.description).toBe(taskData.description);
+      expect(result.task.column).toBe('done');
+      expect(result.task.labels).toEqual(taskData.labels);
+      expect(result.task.sprint).toBe(taskData.sprint);
+      expect(result.task.priority).toBe(taskData.priority);
+      expect(result.task.storyPoints).toBe(taskData.storyPoints);
+    });
+
     it('should update board metadata correctly', () => {
       const filepath = Brands.Filepath(testFilepath);
       

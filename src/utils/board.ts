@@ -45,7 +45,7 @@ export const newTask = (board: Board, taskData: Omit<CreateTaskParams, 'id'>): {
   const task = taskUtils.createTask({
     ...taskData,
     id: nextId,
-    column: findDefaultColumn(board)?.name || '',
+    column: taskData.column ?? (findDefaultColumn(board)?.name || ''),
     dates: {
       created: taskData.dates?.created || now,
       updated: taskData.dates?.updated || now,
