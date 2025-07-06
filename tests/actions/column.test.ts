@@ -144,21 +144,21 @@ describe('column actions', () => {
     it('should update existing column and save to file', () => {
       const filepath = Brands.Filepath(testFilepath);
       
-      const updatedBoard = updateColumn(filepath, 'todo', { name: 'backlog' });
+      const updatedBoard = updateColumn(filepath, 'todo', { name: 'ideas' });
       
-      expect(updatedBoard.columns[0]).toEqual({ name: 'backlog' });
+      expect(updatedBoard.columns[0]).toEqual({ name: 'ideas' });
       
       // Verify saved to file
       const content = fs.readFileSync(testFilepath, 'utf8');
       const savedBoard = yaml.load(content) as Board;
-      expect(savedBoard.columns[0].name).toBe('backlog');
+      expect(savedBoard.columns[0].name).toBe('ideas');
     });
 
     it('should update board updated date', () => {
       const filepath = Brands.Filepath(testFilepath);
       const originalUpdated = sampleBoard.dates.updated;
       
-      const updatedBoard = updateColumn(filepath, 'todo', { name: 'backlog' });
+      const updatedBoard = updateColumn(filepath, 'todo', { name: 'ideas' });
       
       expect(new Date(updatedBoard.dates.updated).getTime()).toBeGreaterThan(
         new Date(originalUpdated).getTime()
@@ -176,7 +176,7 @@ describe('column actions', () => {
     it('should preserve other columns', () => {
       const filepath = Brands.Filepath(testFilepath);
       
-      const updatedBoard = updateColumn(filepath, 'todo', { name: 'backlog' });
+      const updatedBoard = updateColumn(filepath, 'todo', { name: 'ideas' });
       
       expect(updatedBoard.columns[1]).toEqual({ name: 'doing' });
       expect(updatedBoard.columns[2]).toEqual({ name: 'done' });

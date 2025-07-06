@@ -2,7 +2,7 @@ export interface Task {
   id: number;
   title: string;
   description: string;
-  column: string;
+  column?: string;
   sprint?: string;
   labels?: string[];
   storyPoints?: number;

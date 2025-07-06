@@ -9,7 +9,7 @@ export function createTask(taskData: CreateTaskParams): Task {
     id: taskData.id,
     title: taskData.title || '',
     description: taskData.description || '',
-    column: taskData.column || '',
+    column: taskData.column,
     labels: taskData.labels,
     sprint: taskData.sprint,
     storyPoints: taskData.storyPoints,

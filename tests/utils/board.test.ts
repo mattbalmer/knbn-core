@@ -1,4 +1,4 @@
-import { createBoard, findDefaultColumn, newTask } from '../../src/utils/board';
+import { createBoard, newTask } from '../../src/utils/board';
 import { Board } from '../../src/types/knbn';
 import { KNBN_BOARD_VERSION } from '../../src/constants';
 
@@ -10,7 +10,6 @@ describe('board utils', () => {
       expect(board.name).toBe('My Board');
       expect(board.description).toBe('My local kanban board');
       expect(board.columns).toEqual([
-        { name: 'backlog' },
         { name: 'todo' },
         { name: 'working' },
         { name: 'done' }
@@ -86,34 +85,6 @@ describe('board utils', () => {
     });
   });
 
-  describe('findDefaultColumn', () => {
-    it('should return first column as default', () => {
-      const board = createBoard({
-        columns: [{ name: 'first' }, { name: 'second' }, { name: 'third' }]
-      });
-
-      const defaultColumn = findDefaultColumn(board);
-
-      expect(defaultColumn).toEqual({ name: 'first' });
-    });
-
-    it('should return undefined for board with no columns', () => {
-      const board = createBoard({ columns: [] });
-
-      const defaultColumn = findDefaultColumn(board);
-
-      expect(defaultColumn).toBeUndefined();
-    });
-
-    it('should work with default board columns', () => {
-      const board = createBoard({});
-      
-      const defaultColumn = findDefaultColumn(board);
-      
-      expect(defaultColumn).toEqual({ name: 'backlog' });
-    });
-  });
-
   describe('newTask', () => {
     let sampleBoard: Board;
 
@@ -135,7 +106,7 @@ describe('board utils', () => {
       expect(result.task.id).toBe(1);
       expect(result.task.title).toBe('Test Task');
       expect(result.task.description).toBe('Test description');
-      expect(result.task.column).toBe('todo'); // default column
+      expect(result.task.column).not.toBeDefined();
       expect(result.task.dates.created).toBeDefined();
       expect(result.task.dates.updated).toBeDefined();
       
@@ -195,7 +166,7 @@ describe('board utils', () => {
       
       const result = newTask(boardWithoutColumns, { title: 'Test Task' });
       
-      expect(result.task.column).toBe(''); // empty string when no default column
+      expect(result.task.column).toBeUndefined(); // undefined when no default column
     });
 
     it('should use provided task dates when available', () => {

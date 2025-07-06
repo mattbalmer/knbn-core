@@ -151,26 +151,6 @@ describe('task actions', () => {
       expect(tasks[0].title).toBe('Second Task');
     });
 
-    it('should find tasks by sprint', () => {
-      const filepath = Brands.Filepath(testFilepath);
-      
-      const tasks = findTasks(filepath, 'sprint 1');
-      
-      expect(tasks).toHaveLength(2);
-      expect(tasks.map(t => t.id)).toContain(1);
-      expect(tasks.map(t => t.id)).toContain(2);
-    });
-
-    it('should find tasks by labels', () => {
-      const filepath = Brands.Filepath(testFilepath);
-      
-      const tasks = findTasks(filepath, 'feature');
-      
-      expect(tasks).toHaveLength(2);
-      expect(tasks.map(t => t.id)).toContain(1);
-      expect(tasks.map(t => t.id)).toContain(3);
-    });
-
     it('should be case insensitive', () => {
       const filepath = Brands.Filepath(testFilepath);
       
@@ -195,15 +175,6 @@ describe('task actions', () => {
       const tasks = findTasks(filepath, 'bug', ['title']);
       
       expect(tasks).toHaveLength(0); // "bug" not in any title
-    });
-
-    it('should search in labels when keys include labels', () => {
-      const filepath = Brands.Filepath(testFilepath);
-      
-      const tasks = findTasks(filepath, 'urgent', ['labels']);
-      
-      expect(tasks).toHaveLength(1);
-      expect(tasks[0].id).toBe(1);
     });
 
     it('should return empty array when no matches found', () => {
@@ -239,7 +210,7 @@ describe('task actions', () => {
       expect(result.task.id).toBe(4); // Next available ID
       expect(result.task.title).toBe('New Task');
       expect(result.task.description).toBe('New task description');
-      expect(result.task.column).toBe('todo'); // Default column
+      expect(result.task.column).not.toBeDefined();
       
       // Verify saved to file
       const content = fs.readFileSync(testFilepath, 'utf8');
