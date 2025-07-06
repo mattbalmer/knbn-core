@@ -17,8 +17,7 @@ export const findTasks = (filepath: Filepath, query: string, keys?: string[]): T
     return sortTasks(Object.values(board.tasks));
   }
 
-  const stringKeys = ['title', 'description', 'sprint'].filter(key => keys?.includes(key) ?? true);
-  const arrayKeys = ['labels'].filter(key => keys?.includes(key) ?? true);
+  const stringKeys = ['title', 'description'].filter(key => keys?.includes(key) ?? true);
 
   // TODO: make more performant
   const callback = (task: Task) => {
@@ -26,11 +25,7 @@ export const findTasks = (filepath: Filepath, query: string, keys?: string[]): T
       const value = task[key as keyof Task];
       return typeof value === 'string' && value.toLowerCase().includes(lowerQuery);
     });
-    const arrayMatch = arrayKeys.some(key => {
-      const value = task[key as keyof Task];
-      return Array.isArray(value) && value.some(item => item.toLowerCase().includes(lowerQuery));
-    });
-    return stringMatch || arrayMatch;
+    return stringMatch;
   };
 
   return sortTasks(Object.values(board.tasks)

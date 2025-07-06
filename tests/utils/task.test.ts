@@ -9,7 +9,7 @@ describe('task utils', () => {
       expect(task.id).toBe(1);
       expect(task.title).toBe('');
       expect(task.description).toBe('');
-      expect(task.column).toBe('');
+      expect(task.column).toBeUndefined();
       expect(task.labels).toBeUndefined();
       expect(task.sprint).toBeUndefined();
       expect(task.storyPoints).toBeUndefined();

@@ -1,7 +1,6 @@
 name: KnBn Project Board
 description: Development board for the KnBn kanban CLI tool
 columns:
-  - name: backlog
   - name: todo
   - name: working
   - name: done
@@ -20,7 +19,6 @@ tasks:
     id: 2
     title: Consistency in dates for metadata
     description: ''
-    column: backlog
     dates:
       created: '2025-06-30T00:05:25.427Z'
       updated: '2025-06-30T00:05:25.427Z'
@@ -28,7 +26,6 @@ tasks:
     id: 3
     title: Get task / query task ability
     description: So you can tell claude to "get the next todo task"
-    column: backlog
     dates:
       created: '2025-06-30T00:13:27.696Z'
       updated: '2025-06-30T00:13:27.696Z'
@@ -36,7 +33,6 @@ tasks:
     id: 4
     title: Comprehensive documentation
     description: So claude can figure out how to use the commands correctly.
-    column: backlog
     dates:
       created: '2025-06-30T00:13:48.612Z'
       updated: '2025-06-30T00:13:48.612Z'
@@ -44,7 +40,6 @@ tasks:
     id: 5
     title: MCP?
     description: Figure out if some sort of MCP adapter is necessary.
-    column: backlog
     dates:
       created: '2025-06-30T00:14:04.471Z'
       updated: '2025-06-30T00:14:04.471Z'
@@ -52,7 +47,6 @@ tasks:
     id: 6
     title: Open browser by default
     description: Optional flag to suppress opening a browser with URL.
-    column: backlog
     dates:
       created: '2025-06-30T00:15:58.915Z'
       updated: '2025-06-30T00:15:58.915Z'

@@ -11,7 +11,7 @@ export function createBoard(boardData: CreateBoardParams): Board {
   return {
     name: boardData.name ?? 'My Board',
     description: boardData.description ?? 'My local kanban board',
-    columns: boardData.columns ?? [{ name: 'backlog' }, { name: 'todo' }, { name: 'working' }, { name: 'done' }],
+    columns: boardData.columns ?? [{ name: 'todo' }, { name: 'working' }, { name: 'done' }],
     labels: boardData.labels ?? undefined,
     tasks: boardData.tasks ?? {},
     sprints: boardData.sprints ?? undefined,
@@ -25,10 +25,6 @@ export function createBoard(boardData: CreateBoardParams): Board {
       saved: now,
     },
   };
-}
-
-export const findDefaultColumn = (board: Board): Column | undefined => {
-  return board.columns[0];
 }
 
 /**
@@ -45,7 +41,7 @@ export const newTask = (board: Board, taskData: Omit<CreateTaskParams, 'id'>): {
   const task = taskUtils.createTask({
     ...taskData,
     id: nextId,
-    column: taskData.column ?? (findDefaultColumn(board)?.name || ''),
+    column: taskData.column,
     dates: {
       created: taskData.dates?.created || now,
       updated: taskData.dates?.updated || now,

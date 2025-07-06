@@ -100,7 +100,6 @@ describe('board actions', () => {
       expect(board.name).toBe('My Board');
       expect(board.description).toBe('My local kanban board');
       expect(board.columns).toEqual([
-        { name: 'backlog' },
         { name: 'todo' },
         { name: 'working' },
         { name: 'done' }
